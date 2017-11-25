@@ -109,6 +109,11 @@ export default ( mapPropsToData ) => ( WrappedComponent ) => {
 				};
 
 				const cacheKey = `GET::${endpoint}`;
+				dataProps[ key ] = {
+					isLoading: true,
+					error: null,
+					data: null,
+				};
 				if ( requests[ cacheKey ] ) {
 					return requests[ cacheKey ].then( handleData ).catch( handleError )
 				} else if ( window.wpRestApiData[ cacheKey ] ) {

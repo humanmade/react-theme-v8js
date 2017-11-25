@@ -1,6 +1,6 @@
 /* global PHP, echo */
 import React from 'react';
-import { hydrate } from 'react-dom';
+import ReactDOM, { hydrate } from 'react-dom';
 import { renderToString } from 'react-dom/server';
 import './index.css';
 import App from './App';
@@ -17,7 +17,17 @@ if ( typeof isSSR !== 'undefined' ) {
 		</StaticRouter>) );
 } else {
 	hydrate( <BrowserRouter>
-		<App posts={ [] } />
+		<App />
 	</BrowserRouter>,
 	document.getElementById( "app" ) );
+}
+
+
+if ( module.hot ) {
+	module.hot.accept( './App', () => {
+		const NextApp = require( './App' ).default;
+		ReactDOM.render( <BrowserRouter>
+			<NextApp />
+		</BrowserRouter>, document.getElementById( "app" ) );
+	} );
 }
