@@ -5134,6 +5134,13 @@ react-scripts@1.0.17:
   optionalDependencies:
     fsevents "1.1.2"
 
+"react-wp-scripts@git+ssh://git@github.com:humanmade/react-wp-scripts.git":
+  version "0.1.0"
+  resolved "git+ssh://git@github.com:humanmade/react-wp-scripts.git#8988b9e5906de39a3e6d37efcdbf894d70e260c8"
+  dependencies:
+    react-scripts "1.0.17"
+    signal-exit "^3.0.2"
+
 react@^16.1.1:
   version "16.1.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.1.1.tgz#d5c4ef795507e3012282dd51261ff9c0e824fe1f"

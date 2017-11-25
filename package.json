@@ -1,5 +1,5 @@
 {
-  "homepage": "http://localhost:1123/wp-content/themes/react/wordpress-theme/build",
+  "homepage": "http://localhost:1123/wp-content/themes/react/build",
   "name": "wordpress-theme",
   "version": "0.1.0",
   "private": true,
@@ -9,10 +9,11 @@
   "dependencies": {
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "react-wp-scripts": "git+ssh://git@github.com:humanmade/react-wp-scripts.git"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-wp-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

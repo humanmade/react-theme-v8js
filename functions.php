@@ -2,9 +2,12 @@
 
 namespace HM\React_Theme;
 
+use ReactWPScripts;
 use V8Js;
 use WP_REST_Request;
 use Exception;
+
+require_once __DIR__ . '/react-wp-scripts-loader.php';
 
 add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts' );
 
@@ -12,19 +15,11 @@ add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts' );
  * Proper way to enqueue scripts and styles
  */
 function enqueue_scripts() {
-	$manifest = json_decode( file_get_contents( __DIR__ . '/wordpress-theme/build/asset-manifest.json' ), true );
-
-	wp_enqueue_style( 'react', get_template_directory_uri() . '/wordpress-theme/build/' . $manifest['main.css'] );
-
-	if ( defined( 'HM_DEV' ) && HM_DEV ) {
-		wp_enqueue_script( 'react', 'http://localhost:3000/static/js/bundle.js', [ 'wp-api' ], null, true );
-	} else {
-		wp_enqueue_script( 'react', get_template_directory_uri() . '/wordpress-theme/build/' . $manifest['main.js'], [], null, true );
-	}
+	ReactWPScripts\enqueue_assets( 'react', [ 'wp-api' ] );
 }
 
 function render_react_app() {
-	$manifest = json_decode( file_get_contents( __DIR__ . '/wordpress-theme/build/asset-manifest.json' ), true );
+	$manifest = json_decode( file_get_contents( __DIR__ . '/build/asset-manifest.json' ), true );
 	$react = [];
 	// stubs, react
 	$react[] = 'var console = {warn: print, error: print, log: it => print( JSON.stringify( it ) ) };';
@@ -32,7 +27,7 @@ function render_react_app() {
 	$react[] = 'var global = global || this, self = self || this, window = { location: { hostname: "' . $_SERVER['HTTP_HOST'] . '", "pathname": "' . $_SERVER['REQUEST_URI'] . '" }, wpApiSettings: { root: "", nonce: "" } } || this;';
 	$react[] = 'var isSSR = true;';
 	// app's components
-	$react[] = file_get_contents( __DIR__ . '/wordpress-theme/build/' . $manifest['main.js'] );
+	$react[] = file_get_contents( __DIR__ . '/build/' . $manifest['main.js'] );
 	$react[] = ';';
 	$concatenated = implode( ";\n", $react );
 

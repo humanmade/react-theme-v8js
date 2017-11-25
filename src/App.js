@@ -17,8 +17,8 @@ class App extends Component {
 		return (
 			<div className="App">
 				<header className="App-header">
-					<img src={logo} className="App-logo" alt="logo" />
-					<h1 className="App-title">Welcome to React, { this.props.user.isLoading || this.props.user.error ? '' : this.props.user.data.name }</h1>
+					<img src={ logo } className="App-logo" alt="logo" />
+					<h1 className="App-title">Welcome to React WordPress, { this.props.user.isLoading || this.props.user.error ? '' : this.props.user.data.name }</h1>
 				</header>
 				<PostList />
 				<Route path="/:slug/" component={ Post } />
