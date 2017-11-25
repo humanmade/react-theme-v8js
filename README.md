@@ -10,9 +10,8 @@
 ##### Install
 
 ```
-cd wordpress-theme
 yarn install
-yarn run build
+yarn run start
 
 ```
 
